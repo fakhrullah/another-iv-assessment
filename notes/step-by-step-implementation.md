@@ -23,7 +23,7 @@
    
 Make things work with familiar tech stack & only 1-2 new tech. Then refactor with technology specified by requirements.
 
-- [ ] Start with wireframe of the frontend to understand more about the system.
+- [x] Start with wireframe of the frontend to understand more about the system. [<sup>2.1</sup>](#understand-more)
 - [ ] Decide on data structure
 - [ ] Build frontend
   - [ ] Tech stack decision
@@ -32,3 +32,14 @@ Make things work with familiar tech stack & only 1-2 new tech. Then refactor wit
   - [ ] Tech stack decision
 - [ ] Build Payment App micro-service
   - [ ] Tech stack decision
+
+### 2.1 Understand more about the system [<sup>2.1</sup>](#understand-more)
+
+Architecture draft
+
+![Architecture draft](./architecture.jpg)
+
+Wireframe order portal
+
+![wirefram order portal](./order-portal-wireframe.jpg)
+
