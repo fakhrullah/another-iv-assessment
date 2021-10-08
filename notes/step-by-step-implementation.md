@@ -24,7 +24,7 @@
 Make things work with familiar tech stack & only 1-2 new tech. Then refactor with technology specified by requirements.
 
 - [x] Start with wireframe of the frontend to understand more about the system. [<sup>2.1</sup>](#understand-more)
-- [ ] Decide on data structure
+- [x] Decide on data structure [<sup>2.2</sup>](#data-structure)
 - [ ] Build frontend
   - [ ] Tech stack decision
   - [ ] Setup. Build tools, linter, 
@@ -42,4 +42,50 @@ Architecture draft
 Wireframe order portal
 
 ![wirefram order portal](./order-portal-wireframe.jpg)
+
+### 2.2 Data structure [<sup>2.2</sup>](#data-structure)
+
+Data design is important should really spent time to discuss & plan about the design.
+
+```
+# Order App (postgres)
+  |- order_table - 
+  |  |- _id - UUID
+  |  |- status - order_status_lookup.key
+  |  |- user_id -
+  |  |- notes - string, text
+  |  |- order_detail - Array of order_detail_table
+  |  |- total_price
+  |  |- phone_num
+  |  |- created_at
+  |  |- updated_at
+  |
+  |- order_detail_table 
+  |  |- _id - UUID
+  |  |- order_id - order_table.id - one-to-many
+  |  |- item_detail - JSON
+  |  | |- a copy detail of item, so that still has data even after
+  |  |    item is delete by seller 
+  |  |- created_at
+  |  |- updated_at
+  |
+  |- order_status_lookup
+  |  |- key - string unique primary_key
+  |  |  |- created
+  |  |  |- confirmed
+  |  |  |- delivered
+  |  |  |- cancelled
+  |  |
+  |  |- name - string 
+  |  |- created_at
+  |  |- updated_at
+
+# Payment App (mongodb)
+  |- transactions
+  |  |- ObjectId - MongoObjectID
+  |  |- orderId 
+  |  |- userId
+  |  |- createdAt
+  |  |- updatedAt
+```
 
