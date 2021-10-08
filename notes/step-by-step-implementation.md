@@ -26,8 +26,13 @@ Make things work with familiar tech stack & only 1-2 new tech. Then refactor wit
 - [x] Start with wireframe of the frontend to understand more about the system. [<sup>2.1</sup>](#21-understand-more-about-the-system)
 - [x] Decide on data structure [<sup>2.2</sup>](#22-data-structure)
 - [ ] Build frontend [<sup>2.3</sup>](#23-build-order-portal)
-  - [ ] Tech stack decision
-  - [ ] Setup. Build tools, linter, 
+  - [x] Tech stack decision
+  - [x] Setup. Build tools, linter, 
+  - [ ] Build UI layout
+  - [ ] Use react-query for fetch data
+  - [ ] Use fake service for data
+  - [ ] Finish App with fake data
+  - [ ] Implement calling data from server
 - [ ] Build Order App micro-service
   - [ ] Tech stack decision
 - [ ] Build Payment App micro-service
