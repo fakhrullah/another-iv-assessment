@@ -98,6 +98,7 @@ Tech stacks
 - Tests - Jest inclued in CRA
 - ESLint airbnb typescript
 - Chakra UI - https://chakra-ui.com/docs/getting-started
+- React router
 - React-query - fetch data - https://react-query.tanstack.com/installation
 
 Stuck when setup ESLint using airbnb config. Taken a lot of my times.
