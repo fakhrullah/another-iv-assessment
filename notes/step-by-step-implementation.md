@@ -99,3 +99,7 @@ Tech stacks
 - ESLint airbnb typescript
 - Chakra UI - https://chakra-ui.com/docs/getting-started
 - React-query - fetch data - https://react-query.tanstack.com/installation
+
+Stuck when setup ESLint using airbnb config. Taken a lot of my times.
+Found solution: https://www.jacobparis.com/blog/bug-parser-options
+
