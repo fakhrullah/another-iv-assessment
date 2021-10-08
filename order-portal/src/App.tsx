@@ -1,24 +1,23 @@
+import { Container, Heading, Box, Button } from '@chakra-ui/react';
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
 function App() {
+  const orders = ['abc', 'def', 'ghi', 'klm'];
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Container>
+        <Heading as="h1" textAlign="center" py="4">Orders</Heading>
+        
+        <Box display="flex" justifyContent="end">
+          <Button>Create</Button>
+        </Box>
+
+        {orders.map((order) => (
+          <Box key={order}>{order}</Box>
+        ))}
+
+      </Container>
     </div>
   );
 }
