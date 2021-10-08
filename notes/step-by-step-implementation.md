@@ -23,8 +23,8 @@
    
 Make things work with familiar tech stack & only 1-2 new tech. Then refactor with technology specified by requirements.
 
-- [x] Start with wireframe of the frontend to understand more about the system. [<sup>2.1</sup>](#understand-more)
-- [x] Decide on data structure [<sup>2.2</sup>](#data-structure)
+- [x] Start with wireframe of the frontend to understand more about the system. [<sup>2.1</sup>](#21-understand-more-about-the-system)
+- [x] Decide on data structure [<sup>2.2</sup>](#22-data-structure)
 - [ ] Build frontend
   - [ ] Tech stack decision
   - [ ] Setup. Build tools, linter, 
@@ -33,7 +33,7 @@ Make things work with familiar tech stack & only 1-2 new tech. Then refactor wit
 - [ ] Build Payment App micro-service
   - [ ] Tech stack decision
 
-### 2.1 Understand more about the system [<sup>2.1</sup>](#understand-more)
+### 2.1 Understand more about the system
 
 Architecture draft
 
@@ -43,7 +43,7 @@ Wireframe order portal
 
 ![wirefram order portal](./order-portal-wireframe.jpg)
 
-### 2.2 Data structure [<sup>2.2</sup>](#data-structure)
+### 2.2 Data structure
 
 Data design is important should really spent time to discuss & plan about the design.
 
