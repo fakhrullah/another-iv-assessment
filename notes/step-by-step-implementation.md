@@ -25,7 +25,7 @@ Make things work with familiar tech stack & only 1-2 new tech. Then refactor wit
 
 - [x] Start with wireframe of the frontend to understand more about the system. [<sup>2.1</sup>](#21-understand-more-about-the-system)
 - [x] Decide on data structure [<sup>2.2</sup>](#22-data-structure)
-- [ ] Build frontend
+- [ ] Build frontend [<sup>2.3</sup>](#23-build-order-portal)
   - [ ] Tech stack decision
   - [ ] Setup. Build tools, linter, 
 - [ ] Build Order App micro-service
@@ -89,3 +89,13 @@ Data design is important should really spent time to discuss & plan about the de
   |  |- updatedAt
 ```
 
+
+### 2.3 Build Order Portal
+
+Tech stacks
+
+- React with typescript - use CRA - https://create-react-app.dev/docs/adding-typescript/
+- Tests - Jest inclued in CRA
+- ESLint airbnb typescript
+- Chakra UI - https://chakra-ui.com/docs/getting-started
+- React-query - fetch data - https://react-query.tanstack.com/installation
