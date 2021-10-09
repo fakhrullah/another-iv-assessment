@@ -28,7 +28,7 @@ Make things work with familiar tech stack & only 1-2 new tech. Then refactor wit
 - [ ] Build frontend [<sup>2.3</sup>](#23-build-order-portal)
   - [x] Tech stack decision
   - [x] Setup. Build tools, linter, 
-  - [ ] Build UI layout
+  - [ ] Build UI layout [<sup>2.3.1</sup>](#231-build-layout)
   - [ ] Use react-query for fetch data
   - [ ] Use fake service for data
   - [ ] Finish App with fake data
@@ -108,4 +108,14 @@ Tech stacks
 
 Stuck when setup ESLint using airbnb config. Taken a lot of my times.
 Found solution: https://www.jacobparis.com/blog/bug-parser-options
+
+#### 2.3.1 Build Layout
+
+- Build layout with hardcoded data. Just to make the web look how it should.
+- View more order detail will be easier if I just put it on new page.
+  But, here I want to demo intactive in same page.
+  So, Order detail can be view like toggle.
+- No using animation or Chakra UI specific for toggle to save time.
+- 
+
 
