@@ -111,11 +111,19 @@ Found solution: https://www.jacobparis.com/blog/bug-parser-options
 
 #### 2.3.1 Build Layout
 
-- Build layout with hardcoded data. Just to make the web look how it should.
+Build layout with hardcoded data. Just to make the web look how it should.
+
+**Show Order detail**
 - View more order detail will be easier if I just put it on new page.
   But, here I want to demo intactive in same page.
   So, Order detail can be view like toggle.
 - No using animation or Chakra UI specific for toggle to save time.
+
+**Create new Order**
+- In real production, it should be UI flow adding items in cart or any other flow.
+- But in this assessment, I will only use form UI to demonstrate how to send data to server.
+- For small system, using just state storing object is good enough & fast, but usually I use react-hook-form library for easier validation.
+- Latest react-hook-form use spread operator, some default linter give warning for spread operator. Need to do more reading is it spread operator in React is really bad or just a good rule that is OK to be broken.
 - 
 
 
