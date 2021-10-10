@@ -1,23 +1,33 @@
 import React, { useState } from 'react';
 import { OrderModel } from '../models/OrderModel';
-import { Box, Flex, Button, Text } from '@chakra-ui/react';
+import { Box, Flex, Button, Text, Spinner, Center } from '@chakra-ui/react';
 import { convertCentsToRM } from '../libs/helpers';
+import { useMutation } from 'react-query';
+import { getOrderById } from '../services/order_service_fake';
 
 interface Props {
   order: OrderModel
-  onShowMore: (orderId: string) => OrderModel
+  // onShowMore: (orderId: string) => OrderModel
 }
 
 const OrderCard = (props: Props) => {
   const { id, status, totalPrice } = props.order;
 
+  const getOrder = useMutation((orderId: string) => getOrderById(orderId),
+    {
+      onSuccess: (data, variables, context) => {
+        const orderDetail = data;
+        setShowMoreDetail(!showMoreDetail);
+        setOrderMoreDetail(orderDetail);
+      },
+    });
+
   const [showMoreDetail, setShowMoreDetail] = useState<boolean>(false);
   const [orderMoreDetail, setOrderMoreDetail] = useState<OrderModel |  undefined>(undefined);
 
   const onClickShowMore = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const orderDetail = props.onShowMore(id);
-    setShowMoreDetail(!showMoreDetail);
-    setOrderMoreDetail(orderDetail);
+    // const orderDetail = props.onShowMore(id);
+    getOrder.mutate(id);
   };
 
   return (
@@ -32,7 +42,11 @@ const OrderCard = (props: Props) => {
           <Button width="8" fontSize="10" onClick={onClickShowMore}>➕</Button>
         </Box>
       </Flex>
-      {showMoreDetail && <OrderMoreDetail orderMoreDetail={orderMoreDetail} />}
+      {
+        getOrder &&
+        showMoreDetail && <OrderMoreDetail orderMoreDetail={orderMoreDetail} />
+      }
+      { getOrder.isLoading && <Center height="48px" bg="gray.300" ><Spinner /></Center>}
     </Box>
   );
 };
