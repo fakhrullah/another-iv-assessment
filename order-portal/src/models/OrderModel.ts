@@ -1,4 +1,4 @@
-export interface OrderModel {
+export interface OrderModel{
   id: string
   status: OrderStatus
   // Person whom created the order
@@ -16,6 +16,15 @@ export interface OrderModel {
   phoneNumber?: string
   createdAt: Date
   updatedAt: Date
+}
+
+// Sending order data should has less than
+// original retrieve data
+export interface OrderModelSubmit {
+  notes?: string
+  orderItemDetail: OrderItemDetail[]
+  totalPrice: number
+  phoneNumber?: string
 }
 
 export enum OrderStatus {
