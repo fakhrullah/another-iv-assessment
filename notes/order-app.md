@@ -28,4 +28,13 @@ I am going to use tech that easiest for me to make thing works first.
   But, if my real workflow is I will not create folders untill I have too many files or things will be easier if group in folder.
 
 - Use linter - airbnb typescript style - because strict is better for mentainance
-- 
+
+- Order model can be same with the frontend (order-portal). But here, I purposely use slightly different model,
+  to demo, how frontend can deal when send data is not as expected.
+  
+  See [data-structure](./step-by-step-implementation.md#22-data-structure) for data detail
+
+- Add openapi for HTTP API documentation
+- Using VSCode OpenAPI extension to easily view OpenAPI documentation
+- Assume request to Order App is coming through API Gateway. API gateway will take user request & check auth & then modify it by extending with `token` in format `{ userId: 'example-user-id' }`
+
