@@ -27,4 +27,5 @@ I am going to use tech that easiest for me to make thing works first.
 - To demo how I manage files for better management code, here I create folders to group things.
   But, if my real workflow is I will not create folders untill I have too many files or things will be easier if group in folder.
 
-
+- Use linter - airbnb typescript style - because strict is better for mentainance
+- 
