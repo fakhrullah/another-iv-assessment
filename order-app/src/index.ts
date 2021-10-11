@@ -1,5 +1,8 @@
+import dotenv from 'dotenv';
 import fastify from 'fastify';
 import { FastifyCorsOptions } from 'fastify-cors';
+
+dotenv.config();
 
 const server = fastify();
 
