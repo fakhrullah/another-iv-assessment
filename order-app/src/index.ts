@@ -2,8 +2,10 @@ import fastify from 'fastify'
 
 const server = fastify()
 
+server.register(require('./routes/orders'), { prefix: '/orders'})
+
 server.get('/ping', async (request, reply) => {
-  return 'pong pong pong\n'
+  return 'pong pong pong\n';
 })
 
 server.listen(4000, (err, address) => {
