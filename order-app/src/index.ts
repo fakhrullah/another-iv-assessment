@@ -24,6 +24,15 @@ const corsConfig = (): FastifyCorsOptions => ({
   },
 });
 
+const databaseConfig = () => ({
+  client: 'pg',
+  connection: process.env.POSTGRESQL_CONNECTION_STRING,
+  pool: { min: 0, max: 2 },
+  searchPath: ['knex', 'public'],
+});
+
+// server.register(require('fastify-knexjs'), databaseConfig);
+server.register(require('./plugins/knex'), databaseConfig);
 server.register(require('fastify-cors'), corsConfig);
 server.register(require('./routes/orders'), { prefix: '/orders' });
 
