@@ -4,7 +4,12 @@ Continue From [step by step implementation](./step-by-step-implementation)
 
 
 - [ ] Build Order App micro-service
-  - [ ] Tech stack decision
+  - [x] Tech stack decision
+  - [x] Connect to database - use postgresql
+  - [ ] Create order
+  - [ ] Get all order
+  - [ ] Get an order
+  - [ ] Update an order status
 
 #### Tech stack
 
@@ -38,3 +43,20 @@ I am going to use tech that easiest for me to make thing works first.
 - Using VSCode OpenAPI extension to easily view OpenAPI documentation
 - Assume request to Order App is coming through API Gateway. API gateway will take user request & check auth & then modify it by extending with `token` in format `{ userId: 'example-user-id' }`
 
+- Add database to store data. Will use postgresql.
+- I want to use knexjs to make it easier to build query. But I think I gonna need to read more on how to implement it.
+- ~~The problem with Typescript is not many JavaScript library creator spend time to make their package working good with typescript.~~
+- ~~This is the part I hate with typescript, you need to find how to use it with typescript, but with JavaScript any typescript can work.~~
+- ~~But of course, type is good for long-term project. Code readability.~~
+- ~~So, I am going to use fastify-postgres & write postgres query for query to database.~~
+- Somehow I can make it work by refering to this repo: https://github.com/dixonsatit/fastify-typescript/blob/master/src/index.ts
+- And also, add type as I think how it should be done. Not confidence.
+- I struggle to get connection to postgresql database. Then I notice from Knexjs documentation, I did not install `pg` package.
+- So, successfully setup connection to database.
+
+> Refer `.env` file for postgres database setup
+> Use environment `POSTGRESQL_CONNECTION_STRING` to connect to database
+
+```
+POSTGRESQL_CONNECTION_STRING='postgres://<username>:<password>@<db-host>/<database>'
+```

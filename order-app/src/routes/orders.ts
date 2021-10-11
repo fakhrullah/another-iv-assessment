@@ -1,12 +1,45 @@
 import {
   FastifyInstance, FastifyPluginOptions, FastifyRequest,
 } from 'fastify';
+import { Knex } from 'knex';
 
-module.exports = (fastify: FastifyInstance, opts: FastifyPluginOptions, done: any) => {
+interface FastifyInstanceWithKnex extends FastifyInstance {
+  knex: Knex
+}
+
+module.exports = (fastify: FastifyInstanceWithKnex, opts: FastifyPluginOptions, done: any) => {
   // Fetch all
-  fastify.get('/', {}, (req, reply) => {
-    reply.send('hello');
-  });
+  const getAllOrderOpts = {
+    schema: {
+      headers: {
+        user_id: { type: 'string' },
+      },
+    },
+  };
+
+  fastify.get(
+    '/',
+    getAllOrderOpts,
+    async (req, reply) => {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      const { user_id } = req.headers;
+      console.log(user_id);
+      fastify.knex.schema.createTable('cats', (table) => {
+        table.uuid('id');
+        table.string('isPersian');
+      })
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((err) => {
+          console.log('--------errror-----------');
+          console.log(err);
+        });
+      // console.log(catsTable);
+      // fastify.knex('cats').insert({ isPersian: 'yes lah' });
+      reply.send('hello');
+    },
+  );
 
   // Create order
   fastify.post('/', {}, (req, reply) => {
