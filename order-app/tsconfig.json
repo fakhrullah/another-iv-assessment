@@ -102,6 +102,5 @@
   ],
   "exclude": [
     "./babel.config.js",
-    "src/__tests__"
   ]
 }
