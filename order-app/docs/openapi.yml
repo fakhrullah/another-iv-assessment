@@ -1,0 +1,167 @@
+openapi: '3.0.2'
+info:
+  title: Order App service
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:4000
+paths:
+  /orders:
+    get:
+      summary: Get all orders
+      parameters:
+        - $ref: '#/components/parameters/userToken'
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+            
+    post:
+      summary: Create new order
+      parameters:
+        - $ref: '#/components/parameters/userToken'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+
+  /orders/{id}:
+    get:
+      summary: Get an order by id
+      parameters:
+        - $ref: '#/components/parameters/userToken'
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+
+    # put:
+    #   summary: Update an order
+    #   parameters:
+    #     - $ref: '#/components/parameters/userToken'
+    #     - name: id
+    #       in: path
+    #       required: true
+    #       schema:
+    #         type: string
+    #   requestBody:
+    #     content:
+    #       application/json:
+    #         schema:
+    #           $ref: '#/components/schemas/Order'
+    #   responses:
+    #     '200':
+    #       description: OK
+    #       content:
+    #         application/json:
+    #           schema:
+    #             $ref: '#/components/schemas/Order'
+
+  /orders/:id/status:
+    put:
+      summary: Update order status
+      parameters:
+        - $ref: '#/components/parameters/userToken'
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                    - created
+                    - delivered
+                    - cancelled
+                    - confirmed
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        
+components:
+  parameters:
+    userToken:
+      name: token
+      in: header
+      schema:
+        type: object
+        required:
+          - "user_id"
+        properties:
+          user_id:
+            type: string
+
+  schemas:
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+          # status - order_status_lookup.key
+        user_id:
+          type: string
+        notes:
+          type: string
+        order_detail:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderDetail'
+        total_price:
+          type: integer
+        phone_num:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+
+    OrderDetail:
+      type: object
+      properties:
+        id:
+          type: string
+        # order_id - order_table.id - one-to-many
+        order_id:
+          type: string
+        item_detail:
+          # a copy detail of item, so that still has data even after
+          # item is delete by seller
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
