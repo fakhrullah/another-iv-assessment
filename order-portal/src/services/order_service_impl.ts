@@ -1,6 +1,8 @@
 import axios from 'axios';
-import { OrderItemDetail, OrderModel } from '../models/OrderModel';
-import { parse as parseDate, parseISO } from 'date-fns';
+import { OrderItemDetail, OrderModel, OrderModelSubmit } from '../models/OrderModel';
+import { parseISO } from 'date-fns';
+
+const sleep = (ms: number) => new Promise((resolve, reject) => setTimeout(resolve, ms));
 
 export const getAllOrders = async (): Promise<OrderModel[]> => {
 
@@ -75,6 +77,33 @@ export const getOrderById = async (id: string): Promise<OrderModel> => {
   return order;
 };
 
-export const createOrder = async () => {
-  throw new Error('Not implement yet');
+export const createOrder = async (order: OrderModelSubmit) => {
+  console.log('success send data');
+
+  // Mapping OrderModel to server data model
+  const orderToSubmit = {
+    notes: order.notes, 
+    phone_num: order.phoneNumber,
+    total_price: order.totalPrice, 
+    order_detail: (order?.orderItemDetail?.map<{ item_detail: any }>((od) => {
+      return ({
+        item_detail: {
+          name: od.name,
+          price: od.price,
+        },
+      });
+    })),
+  };
+  
+  const responseOrder = await axios({
+    method: 'POST',
+    url: `${process.env.REACT_APP_ORDER_APP_URL}/orders`,
+    headers: {
+      user_id: `${process.env.REACT_APP_USER_ID}`,
+    },
+    data: orderToSubmit,
+  });
+  // await sleep(2);
+
+  return (responseOrder.data as { order: Object }).order;
 };

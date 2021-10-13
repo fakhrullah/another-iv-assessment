@@ -5,8 +5,10 @@ import {
   FormControl, FormLabel, Input, FormHelperText, 
   Textarea,
 } from '@chakra-ui/react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { OrderItemDetail, OrderModel, OrderModelSubmit } from '../models/OrderModel';
+import { useMutation } from 'react-query';
+import { createOrder } from '../services/order_service_impl';
 
 interface Props {
     
@@ -19,12 +21,24 @@ const OrderCreate = (props: Props) => {
     orderItemDetail: [],
   };
 
+  const history = useHistory();
+
   const [orderData, setOrderData] = useState<OrderModelSubmit>(initialOrder);
+  
+  const createOrderMutation = useMutation((orderToSubmit: OrderModelSubmit) => createOrder(orderToSubmit), {
+    onSuccess: (data, variables, context) => {
+      history.push('/');
+    },
+  });
 
   const onsubmit = (e: FormEvent): void => {
     e.preventDefault();
     // should do data validation
-    console.log(orderData);
+    // console.log(orderData);
+
+    // Data validation before send
+    createOrderMutation.mutate(orderData);
+
   };
 
   const onAddItem = () => {
@@ -54,6 +68,15 @@ const OrderCreate = (props: Props) => {
             <Input type="number"
               value={orderData?.phoneNumber || ''}
               onChange={(e) => setOrderData({ ...orderData, phoneNumber: e.target.value })}
+            />
+            <FormHelperText>Your contact number</FormHelperText>
+          </FormControl>
+
+          <FormControl id="totalPrice">
+            <FormLabel>Total Price ( In cent. Example: write 1200 for RM 12.00)</FormLabel>
+            <Input type="number"
+              value={orderData?.totalPrice || ''}
+              onChange={(e) => setOrderData({ ...orderData, totalPrice: parseInt(e.target.value) })}
             />
             <FormHelperText>Your contact number</FormHelperText>
           </FormControl>
