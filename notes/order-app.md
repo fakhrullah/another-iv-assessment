@@ -6,9 +6,9 @@ Continue From [step by step implementation](./step-by-step-implementation)
 - [ ] Build Order App micro-service
   - [x] Tech stack decision
   - [x] Connect to database - use postgresql
-  - [ ] Create order
-  - [ ] Get all order
-  - [ ] Get an order
+  - [x] Create order
+  - [x] Get all order
+  - [x] Get an order
   - [ ] Update an order status
 
 #### Tech stack
@@ -94,6 +94,17 @@ POSTGRESQL_CONNECTION_STRING='postgres://<username>:<password>@<db-host>/<databa
 
 - Fix query created_at, updated_at key overwrite when use `join()`
 
+#### Get an order
+
+- GET /orders/:id - return an order
+
+#### Create new order
+
+- POST /orders
+- Lot of manual coding. Examples:
+  - Mapping received data into data that model that can be insert in postgres,
+  - In real life, those MUST be refactor with an standardize functions or library (if there is one)
+  - Only after refactor finish, code can be considered as complete (Definition of DONE)
 
 
 
