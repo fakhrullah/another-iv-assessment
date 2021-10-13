@@ -9,7 +9,8 @@ Continue From [step by step implementation](./step-by-step-implementation)
   - [x] Create order
   - [x] Get all order
   - [x] Get an order
-  - [ ] Update an order status
+  - [x] Update an order status
+  - [ ] Trigger payment after order created
 
 #### Tech stack
 
@@ -112,3 +113,19 @@ POSTGRESQL_CONNECTION_STRING='postgres://<username>:<password>@<db-host>/<databa
 - Update status ONLY
 
 
+
+#### Trigger payment
+
+- When Order is created - POST /orders
+- Send request to payment service at the backend - So, do not wait for respond
+- Payment service received request
+- Payment service send response to update Order status - PUT /orders/:id/status
+- 
+
+#### Code quality
+
+- Should refactor
+- A lot code should be re-usable
+- But NOT going to do here, because time not allowed
+- This gonna be more beautiful if using event-sourcing (RabbitMQ, Google pub-sub) which adding more new things to learn
+- 

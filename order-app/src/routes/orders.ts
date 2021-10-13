@@ -58,6 +58,8 @@ module.exports = (fastify: FastifyInstanceWithKnex, opts: FastifyPluginOptions, 
           order_detail: groupedOrderDetails[order.id],
         }));
 
+        // TODO: trigger payment
+
         // reply.send(orders);
         reply.send({ orders: mappedOrders });
       } catch (error) {
