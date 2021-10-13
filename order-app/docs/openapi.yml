@@ -88,9 +88,9 @@ components:
       schema:
         type: object
         required:
-          - "userId"
+          - "user_id"
         properties:
-          userId:
+          user_id:
             type: string
 
   schemas:
