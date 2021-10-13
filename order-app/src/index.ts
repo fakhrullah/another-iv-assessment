@@ -1,9 +1,13 @@
 import dotenv from 'dotenv';
 import build from './app';
+import { corsOptions, postgresDatabaseOptions } from './configs/fastify_plugin_configs';
 
 dotenv.config();
 
-const app = build({});
+const app = build({
+  corsOptions: corsOptions(),
+  knexOptions: postgresDatabaseOptions(),
+});
 
 app.listen(4000, (err, address) => {
   if (err) {
