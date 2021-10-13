@@ -3,7 +3,7 @@ exports.up = function(knex) {
   return knex.schema.withSchema('public').createTable('order_status', (table) => {
     table.string('key').primary();
     table.string('name');
-    table.timestamps();
+    table.timestamps(true, true);
   });
 };
 

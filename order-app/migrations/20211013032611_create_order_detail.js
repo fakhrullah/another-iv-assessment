@@ -6,7 +6,7 @@ exports.up = function(knex) {
       table.uuid('order_id');
       table.foreign('order_id').references('orders.id');
       table.json('item_detail');
-      table.timestamps();
+      table.timestamps(true, true);
     })
 };
 
