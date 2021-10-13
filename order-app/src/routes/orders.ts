@@ -2,6 +2,7 @@ import {
   FastifyInstance, FastifyPluginOptions, FastifyRequest,
 } from 'fastify';
 import { Knex } from 'knex';
+import { isValidOrderStatus } from '../helpers';
 
 export interface FastifyInstanceWithKnex extends FastifyInstance {
   knex: Knex
@@ -66,12 +67,7 @@ module.exports = (fastify: FastifyInstanceWithKnex, opts: FastifyPluginOptions, 
   );
 
   type CreateOrderRequest = FastifyRequest<{
-    Body: {
-      notes: string
-      total_price: number
-      phone_num: string
-      order_detail: OrderDetailModel[]
-    }
+    Body: OrderModel
   }>;
   // Create order
   fastify.post(
@@ -109,14 +105,42 @@ module.exports = (fastify: FastifyInstanceWithKnex, opts: FastifyPluginOptions, 
   );
 
   type OrderRequestUpdate = FastifyRequest<{
-    Params: { id: string }
+    Params: {
+      id: String
+    },
+    Body: {
+      status: string
+    }
   }>;
 
-  // Update order
-  fastify.put('/:id', {}, (req: OrderRequestUpdate, reply) => {
-    const { id } = req.params;
-    reply.send(`hello ${id}`);
-  });
+  // Update order status only
+  // - because update order is not requirement
+  fastify.put(
+    '/:id/status',
+    getAllOrderOpts,
+    async (req: OrderRequestUpdate, reply) => {
+      const { id } = req.params;
+      const { status } = req.body;
+
+      // validate - status
+      if (!isValidOrderStatus(status)) {
+        reply.send(new Error(`Status : ${status} is not available`));
+        return;
+      }
+
+      try {
+        const order = await fastify.knex('orders')
+          .select('id, status')
+          .where({ id })
+          .update({ status })
+          .returning('*');
+
+        reply.send(order);
+      } catch (error) {
+        reply.send(error);
+      }
+    },
+  );
 
   type OrderRequestOne = FastifyRequest<{
     Params: { id: string }
@@ -162,4 +186,11 @@ module.exports = (fastify: FastifyInstanceWithKnex, opts: FastifyPluginOptions, 
 
 interface OrderDetailModel {
   item_detail: any
+}
+
+interface OrderModel {
+  notes: string
+  total_price: number
+  phone_num: string
+  order_detail: OrderDetailModel[]
 }
