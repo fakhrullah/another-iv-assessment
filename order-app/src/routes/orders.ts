@@ -1,8 +1,10 @@
+import axios from 'axios';
 import {
   FastifyInstance, FastifyPluginOptions, FastifyRequest,
 } from 'fastify';
 import { Knex } from 'knex';
 import { isValidOrderStatus } from '../helpers';
+import Config from '../configs/config';
 
 export interface FastifyInstanceWithKnex extends FastifyInstance {
   knex: Knex
@@ -58,8 +60,6 @@ module.exports = (fastify: FastifyInstanceWithKnex, opts: FastifyPluginOptions, 
           order_detail: groupedOrderDetails[order.id],
         }));
 
-        // TODO: trigger payment
-
         // reply.send(orders);
         reply.send({ orders: mappedOrders });
       } catch (error) {
@@ -99,6 +99,25 @@ module.exports = (fastify: FastifyInstanceWithKnex, opts: FastifyPluginOptions, 
           .insert(orderDetails)
           .returning('*');
 
+        axios({
+          method: 'POST',
+          url: Config.PAYMENT_APP_URL,
+          data: {
+            order_id: createdOrder[0].id,
+            user_id,
+          },
+        })
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          .then((response) => {
+            // console.log(response);
+            console.log('Should trigger Payment');
+          })
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          .catch((err) => {
+            console.log(err);
+            console.log('ERROR trigger Payment service');
+          });
+
         reply.send({ order: { ...createdOrder[0], order_detail: createdOrderDetail } });
       } catch (error) {
         reply.send(error);
@@ -136,6 +155,15 @@ module.exports = (fastify: FastifyInstanceWithKnex, opts: FastifyPluginOptions, 
           .where({ id })
           .update({ status })
           .returning('*');
+
+        if (status === 'confirmed') {
+          setTimeout(() => {
+            fastify.knex('orders')
+              .select('id, status')
+              .where({ id })
+              .update({ status: 'delivered' });
+          }, 10_000);
+        }
 
         reply.send(order);
       } catch (error) {

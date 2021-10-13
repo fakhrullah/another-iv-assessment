@@ -120,7 +120,10 @@ POSTGRESQL_CONNECTION_STRING='postgres://<username>:<password>@<db-host>/<databa
 - Send request to payment service at the backend - So, do not wait for respond
 - Payment service received request
 - Payment service send response to update Order status - PUT /orders/:id/status
-- 
+
+- One more thing: nearly missed this requirement: 
+  > After X amount of seconds confirmed orders should automatically be moved to the delivered state.
+- In GET /orders/:id/status - if confirmed - use setTimeout X seconds change to delivered
 
 #### Code quality
 
