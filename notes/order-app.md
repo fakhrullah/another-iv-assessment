@@ -69,4 +69,12 @@ POSTGRESQL_CONNECTION_STRING='postgres://<username>:<password>@<db-host>/<databa
 - Connect to postgresql
 - Add knex migration
 - Use `knexjs` for query builder because I think it more easier & safer compare to raw SQL
-- 
+
+- Add migrations & seeders
+- Migration must be run to postgresql ONLY because the function `uuid` is only for postgresql
+- Order Status seed must be run as it is default status.
+- But for the demo, run all seeders so that we will have some samples to work with.
+- `knex migrate:latest`
+- `knex seed:run`
+
+
