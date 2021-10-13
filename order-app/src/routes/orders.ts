@@ -65,10 +65,48 @@ module.exports = (fastify: FastifyInstanceWithKnex, opts: FastifyPluginOptions, 
     },
   );
 
+  type CreateOrderRequest = FastifyRequest<{
+    Body: {
+      notes: string
+      total_price: number
+      phone_num: string
+      order_detail: OrderDetailModel[]
+    }
+  }>;
   // Create order
-  fastify.post('/', {}, (req, reply) => {
-    reply.send('hello create');
-  });
+  fastify.post(
+    '/',
+    getAllOrderOpts,
+    async (req: CreateOrderRequest, reply) => {
+      const order = req.body;
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      const { user_id } = req.headers;
+      // append created status
+
+      try {
+        // filter out order_detail
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        const { order_detail, ...orderToInsert } = order;
+
+        const createdOrder = await fastify.knex('orders')
+          .insert({ ...orderToInsert, user_id, status: 'created' })
+          .returning('*');
+
+        const orderDetails = order_detail.map((od) => ({
+          order_id: createdOrder[0].id,
+          item_detail: od,
+        }));
+
+        const createdOrderDetail = await fastify.knex('order_detail')
+          .insert(orderDetails)
+          .returning('*');
+
+        reply.send({ order: { ...createdOrder[0], order_detail: createdOrderDetail } });
+      } catch (error) {
+        reply.send(error);
+      }
+    },
+  );
 
   type OrderRequestUpdate = FastifyRequest<{
     Params: { id: string }
@@ -121,3 +159,7 @@ module.exports = (fastify: FastifyInstanceWithKnex, opts: FastifyPluginOptions, 
 
   done();
 };
+
+interface OrderDetailModel {
+  item_detail: any
+}
