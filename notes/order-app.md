@@ -92,6 +92,8 @@ POSTGRESQL_CONNECTION_STRING='postgres://<username>:<password>@<db-host>/<databa
 - If, I do that, it gonna take a lot of time.
 - So, I query 2 times, `order` & `order_detail`. Then, group `order_detail` with same `order.id`
 
+- Fix query created_at, updated_at key overwrite when use `join()`
+
 
 
 
