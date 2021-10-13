@@ -13,10 +13,11 @@
   "author": "Fakhrullah Padzil",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.23.0",
     "dotenv": "^10.0.0",
     "fastify": "^3.22.0"
   },
   "devDependencies": {
-    "ts-node": "^10.3.0"
+    "ts-node-dev": "^1.1.8"
   }
 }
