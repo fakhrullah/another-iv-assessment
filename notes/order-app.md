@@ -82,5 +82,17 @@ POSTGRESQL_CONNECTION_STRING='postgres://<username>:<password>@<db-host>/<databa
   backend as a service, BAAS (Parse-server)
 - Those handle database connection & has ORM.
 
+#### Get all orders
+
+- GET /orders - get all orders, auth-token in header MUST contain user_id
+- When you query from database, the data will always return in rows. But, I want it to become Object that contains certain key with array of data.
+- Here, the query leftJoin order_detail will return array of order_detail `order_detail`
+- I want it to become `order{..., itemDetail[], }`
+- To do this, I have to map the data. And think of algorithm to loop the data and do the grouping.
+- If, I do that, it gonna take a lot of time.
+- So, I query 2 times, `order` & `order_detail`. Then, group `order_detail` with same `order.id`
+
+
+
 
 
