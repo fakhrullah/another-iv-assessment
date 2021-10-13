@@ -3,7 +3,8 @@ import { OrderModel } from '../models/OrderModel';
 import { Box, Flex, Button, Text, Spinner, Center } from '@chakra-ui/react';
 import { convertCentsToRM } from '../libs/helpers';
 import { useMutation } from 'react-query';
-import { getOrderById } from '../services/order_service_fake';
+// import { getOrderById } from '../services/order_service_fake';
+import { getOrderById } from '../services/order_service_impl';
 
 interface Props {
   order: OrderModel
@@ -46,7 +47,7 @@ const OrderCard = (props: Props) => {
         getOrder &&
         showMoreDetail && <OrderMoreDetail orderMoreDetail={orderMoreDetail} />
       }
-      { getOrder.isLoading && <Center height="48px" bg="gray.300" ><Spinner /></Center>}
+      { !showMoreDetail && getOrder.isLoading && <Center height="48px" bg="gray.300" ><Spinner /></Center>}
     </Box>
   );
 };
