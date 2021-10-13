@@ -106,6 +106,9 @@ POSTGRESQL_CONNECTION_STRING='postgres://<username>:<password>@<db-host>/<databa
   - In real life, those MUST be refactor with an standardize functions or library (if there is one)
   - Only after refactor finish, code can be considered as complete (Definition of DONE)
 
+#### Update order
 
+- PUT /orders/:id/status
+- Update status ONLY
 
 
