@@ -61,3 +61,12 @@ I am going to use tech that easiest for me to make thing works first.
 POSTGRESQL_CONNECTION_STRING='postgres://<username>:<password>@<db-host>/<database>'
 ```
 
+- Having hard time to implement mock knex with Fastify.
+- Cannot mocking database mean cannot test http routes that use `fastify.knex`.
+- So, testing integration for CRUD is not possible. Will try again later if I have more times.
+
+- Create free postgresql database at [ElephatSQL](https://www.elephantsql.com/)
+- Connect to postgresql
+- Add knex migration
+- Use `knexjs` for query builder because I think it more easier & safer compare to raw SQL
+- 
