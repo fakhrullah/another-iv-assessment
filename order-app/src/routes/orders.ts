@@ -82,11 +82,41 @@ module.exports = (fastify: FastifyInstanceWithKnex, opts: FastifyPluginOptions, 
   type OrderRequestOne = FastifyRequest<{
     Params: { id: string }
   }>;
+
   // Read an order
-  fastify.get('/:id', {}, (req: OrderRequestOne, reply) => {
-    const { id } = req.params;
-    reply.send(`hello ${id}`);
-  });
+  fastify.get(
+    '/:id',
+    getAllOrderOpts,
+    async (req: OrderRequestOne, reply) => {
+      const { id } = req.params;
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      const { user_id } = req.headers;
+
+      try {
+        const order = await fastify.knex('orders')
+          .select('*')
+          .where({
+            id,
+            user_id,
+          });
+
+        const orderDetails = await fastify.knex('order_detail')
+          .select('*')
+          .where({
+            order_id: order[0].id,
+          });
+
+        reply.send({
+          order: {
+            ...order[0],
+            order_detail: orderDetails,
+          },
+        });
+      } catch (error) {
+        reply.send(error);
+      }
+    },
+  );
 
   done();
 };
