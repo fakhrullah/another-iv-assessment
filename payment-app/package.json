@@ -1,0 +1,24 @@
+{
+  "name": "payment-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./dist/index.js",
+    "dev": "ts-node ./src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Fakhrullah Padzil",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.23.0",
+    "dotenv": "^10.0.0",
+    "fastify": "^3.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.10.6",
+    "ts-node-dev": "^1.1.8"
+  }
+}
