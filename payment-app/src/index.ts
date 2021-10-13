@@ -4,6 +4,10 @@ import config from './config';
 
 const server = fastify()
 
+server.get('/health',{}, async (req, reply) => {
+  reply.send('healthy')
+})
+
 type PaymentRequest = FastifyRequest<{
   Body: {
     order_id: string
