@@ -2,7 +2,8 @@ import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Container, Heading, Box, Button } from '@chakra-ui/react';
 import OrderCard from '../components/OrderCard';
-import { getAllOrders } from '../services/order_service_fake';
+// import { getAllOrders } from '../services/order_service_fake';
+import { getAllOrders } from '../services/order_service_impl';
 import { useQuery } from 'react-query';
 
 interface Props {
