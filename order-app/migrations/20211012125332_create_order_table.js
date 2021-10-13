@@ -12,7 +12,7 @@ exports.up = function (knex) {
     // user_id not a foreign key because user data is handle by other micro-service
     table.string('user_id')
     // will add created_at & updated_at column
-    table.timestamps();
+    table.timestamps(true, true);
   });
 };
 

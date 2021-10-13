@@ -32,10 +32,11 @@ module.exports = (fastify: FastifyInstanceWithKnex, opts: FastifyPluginOptions, 
 
       try {
         const orders = await fastify.knex
-          .select('*')
+          .select(['orders.*', 'order_status.key', 'order_status.name'])
           .from('orders')
           .join('order_status', { 'orders.status': 'order_status.key' })
-          .where('user_id', user_id);
+          .where('user_id', user_id)
+          .orderBy('orders.created_at', 'desc');
 
         const orderIds: string[] = orders.map<string>((order) => order.id);
 
