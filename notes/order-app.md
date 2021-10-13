@@ -77,4 +77,10 @@ POSTGRESQL_CONNECTION_STRING='postgres://<username>:<password>@<db-host>/<databa
 - `knex migrate:latest`
 - `knex seed:run`
 
+- having hard time to setup for database here
+- Because, as a small company, I focus on building thing faster, then refactor later. So, I usually use headless CMS (StrapiJS) or
+  backend as a service, BAAS (Parse-server)
+- Those handle database connection & has ORM.
+
+
 
